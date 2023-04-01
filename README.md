@@ -1,2 +1,2 @@
-# HookAMS
-hook ams demo
+# Android framework Hook demo
+hook demo
