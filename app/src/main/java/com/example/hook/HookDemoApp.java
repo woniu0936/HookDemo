@@ -1,8 +1,17 @@
 package com.example.hook;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.example.hook.activity.HookHelper;
 
 public class HookDemoApp extends Application {
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        HookHelper.hookAMN();
+        super.attachBaseContext(base);
+    }
 
     private static HookDemoApp mInstance;
 

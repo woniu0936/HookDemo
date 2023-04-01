@@ -1,4 +1,4 @@
-package com.example.hook.activity.hook01;
+package com.example.hook.activity.hook02;
 
 import android.os.Bundle;
 
@@ -9,9 +9,9 @@ import com.example.hook.R;
 import com.example.hook.activity.BaseActivity;
 
 /**
- * 通过hook Activity的mInstrumentation字段hook startActivity
+ * 通过hook ActivityManagerNative的getDefault()方法
  */
-public class HookStartActivity01 extends BaseActivity {
+public class HookStartActivity02 extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
