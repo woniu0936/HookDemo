@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.example.hook.activity.hook01.HookStartActivity01;
 import com.example.hook.activity.hook02.HookStartActivity02;
+import com.example.hook.activity.hook03.HookStartActivity03;
 import com.example.hook.databinding.ActivityHookStartBinding;
 import com.example.hook.utils.Utils;
 
@@ -19,8 +20,8 @@ public class HookStartActivity extends BaseActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
+        HookHelper.hookActivityThreadHandler();
         super.attachBaseContext(newBase);
-
     }
 
     @Override
@@ -40,6 +41,13 @@ public class HookStartActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Utils.startActivity(HookStartActivity02.class);
+            }
+        });
+
+        mBinding.btnHook03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.startActivity(HookStartActivity03.class);
             }
         });
 

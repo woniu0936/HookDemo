@@ -33,6 +33,9 @@
         <activity
             android:name=".activity.hook02.HookStartActivity02"
             android:exported="true" />
+        <activity
+            android:name=".activity.hook03.HookStartActivity03"
+            android:exported="true" />
     </application>
 
 </manifest>

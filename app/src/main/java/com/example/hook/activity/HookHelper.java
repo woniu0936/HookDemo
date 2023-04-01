@@ -2,9 +2,12 @@ package com.example.hook.activity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.app.RecoverableSecurityException;
+import android.os.Handler;
 
 import com.example.hook.activity.hook01.EvilInstrumentation;
 import com.example.hook.activity.hook02.HookHandler;
+import com.example.hook.activity.hook03.HCallback;
 import com.example.hook.utils.Reflect;
 
 import java.lang.reflect.Proxy;
@@ -36,6 +39,31 @@ public class HookHelper {
 
         Reflect.on(gDefault).set("mInstance", proxy);
 
+    }
+
+    /**
+     * hook ActivityThread的mH对象
+     */
+    public static void hookActivityThreadHandler() {
+        Object activityThread = Reflect.on("android.app.ActivityThread").get("sCurrentActivityThread");
+        Handler mH = Reflect.on(activityThread).get("mH");
+        /*这里的mH因为是ActivityThread的内部类，所以类型是android.app.ActivityThread$H
+         自定义的Handler继承android.os.Handler和mH的类型不一样，所以替换不了，但是观察Handler源码发现
+         可以替换mCallback来拦截后面的handleMessage(msg);方法，从而达到拦截mH的handleMessage(msg);方法的目的
+         public void dispatchMessage(@NonNull Message msg) {
+             if (msg.callback != null) {
+                handleCallback(msg);
+             } else {
+                if (mCallback != null) {
+                     if (mCallback.handleMessage(msg)) {
+                     return;
+                 }
+             }
+             handleMessage(msg);
+             }
+         }
+         */
+        Reflect.on(mH).set("mCallback", new HCallback(mH));
     }
 
 }

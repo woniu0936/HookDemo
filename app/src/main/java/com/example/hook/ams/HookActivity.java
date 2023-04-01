@@ -38,5 +38,6 @@ public class HookActivity extends AppCompatActivity {
 
         //测试有没有hook住PMS
         getPackageManager().getPackageInstaller();
+
     }
 }
