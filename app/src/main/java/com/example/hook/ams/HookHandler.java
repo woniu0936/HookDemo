@@ -18,8 +18,8 @@ public class HookHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object o, Method method, Object[] args) throws Throwable {
-        Log.d(TAG, "hey, baby; you are hooked!!");
-        Log.d(TAG, "method:" + method.getName() + " called with args:" + Arrays.toString(args));
+        Log.d(TAG, "\nhey, baby; you are hooked!!");
+        Log.d(TAG, obj.getClass().getName() + ", method[" + method.getName() + "] called with args:" + Arrays.toString(args));
         return method.invoke(obj, args);
     }
 }

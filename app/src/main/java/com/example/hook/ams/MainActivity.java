@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         HookHelper.hookActivityManager();
+        HookHelper.hookPackageManager(newBase);
         super.attachBaseContext(newBase);
     }
 
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
             t.setData(uri);
             startActivity(t);
         });
+
+        //测试有没有hook住PMS
+        getPackageManager().getPackageInstaller();
 
     }
 }
