@@ -3,7 +3,6 @@ package com.example.hook.activity.hook01;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hook.R;
 import com.example.hook.activity.BaseActivity;

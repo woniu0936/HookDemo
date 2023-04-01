@@ -40,4 +40,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_hook_04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hook ActivityThread的变量mInstrumentation"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

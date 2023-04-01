@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.example.hook.utils.Reflect;
+import com.example.hook.utils.Utils;
 
 public class EvilInstrumentation extends Instrumentation {
 
@@ -24,6 +25,7 @@ public class EvilInstrumentation extends Instrumentation {
      * 这里有一个细节，虽然父类的execStartActivity方法是private的，无法重写，
      * 但是我们在这里定义一个和父类方法名与参数相同的execStartActivity方法，
      * 最终用EvilInstrumentation替换掉Instrumentation之后，还是会调用这个方法
+     *
      * @param who
      * @param contextThread
      * @param token
@@ -36,7 +38,7 @@ public class EvilInstrumentation extends Instrumentation {
     public ActivityResult execStartActivity(Context who, IBinder contextThread, IBinder token, Activity target,
                                             Intent intent, int requestCode, Bundle options) {
         try {
-            Log.d(TAG, "hook Instrumentation execStartActivity method, in activity: " + target.getClass().getName());
+            Utils.logInvoke(TAG, "execStartActivity", who, contextThread, token, target, intent, requestCode, options);
             return Reflect.on(mBase).call("execStartActivity", who, contextThread, token, target, intent, requestCode, options).get();
         } catch (Exception e) {
             Log.e(TAG, "execStartActivity invoke error: " + e.getMessage());

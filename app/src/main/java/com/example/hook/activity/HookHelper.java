@@ -2,16 +2,28 @@ package com.example.hook.activity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.app.RecoverableSecurityException;
 import android.os.Handler;
 
 import com.example.hook.activity.hook01.EvilInstrumentation;
 import com.example.hook.activity.hook02.HookHandler;
 import com.example.hook.activity.hook03.HCallback;
+import com.example.hook.activity.hook04.EvilInstrumentation04;
 import com.example.hook.utils.Reflect;
 
 import java.lang.reflect.Proxy;
 
+/**
+ * 截至现在，我们已经陆陆续续Hook了很多类，要么使用静态代理，要么使用动态代理，回顾一下：
+ *
+ * ·使用静态代理，只有两个类，一个是Handler.Callback，另一个是Instrumentation。参与Android系统运转的类，暴露给我们的只有这两个。
+ *
+ * ·使用动态代理，只有两个接口，一个是IPackageManager，另一个是IActivityManager。这符合Proxy.newProxyInstance方法的特性，它只能对接口类型的对象进行Hook。
+ *
+ * 再看ActivityThread的mH字段，它是H类型的，H类是不对外暴露的，所以我们没办法伪造一个H类型的对象取代mH字段；同时，H类也不是接口类型，所以Proxy.newProxyInstance是派不上用场的。
+ *
+ * Android系统中大部分类是不对外暴露的，能让我们做Hook的类和对象实在不多。
+ *
+ */
 public class HookHelper {
 
     /**
@@ -64,6 +76,15 @@ public class HookHelper {
          }
          */
         Reflect.on(mH).set("mCallback", new HCallback(mH));
+    }
+
+    /**
+     * hook ActivityThread的mInstrumentation类
+     */
+    public static void hookActivityThreadInstrumentation() {
+        Object activityThread = Reflect.on("android.app.ActivityThread").get("sCurrentActivityThread");
+        Instrumentation mInstrumentation = Reflect.on(activityThread).get("mInstrumentation");
+        Reflect.on(activityThread).set("mInstrumentation", new EvilInstrumentation04(mInstrumentation));
     }
 
 }

@@ -40,4 +40,28 @@ public class Utils {
         }
         Log.d(tag, sb.toString());
     }
+
+    public static void logInvoke(Object o, String methodName, Object... args) {
+        logInvoke(TAG, o, methodName, args);
+    }
+
+    public static void logInvoke(String tag, Object o, String methodName, Object... args) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("object: ")
+                .append(o.getClass().getName())
+                .append(", ")
+                .append("method: ")
+                .append(methodName);
+        if (args != null) {
+            for (Object arg : args) {
+                if (arg != null) {
+                    sb.append(", ")
+                            .append(arg.getClass().getSimpleName())
+                            .append(": ")
+                            .append(arg);
+                }
+            }
+        }
+        Log.d(tag, sb.toString());
+    }
 }
