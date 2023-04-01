@@ -3,6 +3,8 @@ package com.example.hook.ams;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import com.example.hook.utils.RefInvoke;
+
 import java.lang.reflect.Proxy;
 
 public class HookHelper {

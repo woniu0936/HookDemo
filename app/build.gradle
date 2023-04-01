@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.hook.ams'
+    namespace 'com.example.hook'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.hook.ams"
+        applicationId "com.example.hook"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -25,6 +25,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 
