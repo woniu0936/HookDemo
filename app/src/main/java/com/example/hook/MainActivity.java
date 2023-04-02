@@ -18,14 +18,18 @@ import com.example.hook.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        HookHelper.attachBaseContext();
+    }
+
     private ActivityMainBinding mBinding;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HookHelper.hookAMN();
-        HookHelper.hookActivityThread();
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 

@@ -37,7 +37,9 @@ public class HCallback implements Handler.Callback {
         //把替身恢复成真身
         Intent intent = Reflect.on(obj).get("intent");
         Intent targetIntent = intent.getParcelableExtra(HookHelper.EXTRA_TARGET_INTENT);
-        intent.setComponent(targetIntent.getComponent());
+        if (targetIntent != null) {
+            intent.setComponent(targetIntent.getComponent());
+        }
     }
 
 }
