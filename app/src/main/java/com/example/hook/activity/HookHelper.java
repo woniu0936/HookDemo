@@ -34,12 +34,13 @@ public class HookHelper {
      * @param activity
      */
     public static void hookActivity(Activity activity) {
+        //hook Activity的mInstrumentation 只能hook住activity.startActivity()方法
         Instrumentation mInstrumentation = Reflect.on(activity).get("mInstrumentation");
         Reflect.on(activity).set("mInstrumentation", new EvilInstrumentation(mInstrumentation));
     }
 
     public static void hookAMN() {
-
+        //hook ActivityManagerNative可以同时hook住activity.startActivity()方法和context.startActivity()方法
         Object gDefault = Reflect.on("android.app.ActivityManagerNative").get("gDefault");
         Object mInstance = Reflect.on(gDefault).get("mInstance");
         Class<?> iActivityManagerInterface = Reflect.on("android.app.IActivityManager").type();
@@ -82,6 +83,7 @@ public class HookHelper {
      * hook ActivityThread的mInstrumentation类
      */
     public static void hookActivityThreadInstrumentation() {
+        //hook ActivityThread的mInstrumentation 只能hook住context.startActivity()方法
         Object activityThread = Reflect.on("android.app.ActivityThread").get("sCurrentActivityThread");
         Instrumentation mInstrumentation = Reflect.on(activityThread).get("mInstrumentation");
         Reflect.on(activityThread).set("mInstrumentation", new EvilInstrumentation04(mInstrumentation));

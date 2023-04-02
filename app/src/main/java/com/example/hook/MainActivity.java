@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hook.R;
 import com.example.hook.activity.HookStartActivity;
-import com.example.hook.ams.HookHelper;
 import com.example.hook.databinding.ActivityMainBinding;
+import com.example.hook.replace.HookHelper;
+import com.example.hook.replace.TargetActivity;
 import com.example.hook.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HookHelper.hookAMN();
+        HookHelper.hookActivityThread();
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
@@ -38,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils.startActivity(HookStartActivity.class);
+            }
+        });
+
+        mBinding.btnHookTargetActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.startActivity(TargetActivity.class);
             }
         });
 

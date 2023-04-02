@@ -1,5 +1,6 @@
 package com.example.hook.utils;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
@@ -11,10 +12,23 @@ public class Utils {
 
     private static final String TAG = "HookDemoApp";
 
+    /**
+     * 通过Context启动activity
+     * @param clazz
+     */
     public static final void startActivity(Class clazz) {
         Intent intent = new Intent(HookDemoApp.instance(), clazz);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         HookDemoApp.instance().startActivity(intent);
+    }
+
+    /**
+     * 通过Activity启动activity
+     * @param activity
+     */
+    public static final void startActivity(Activity activity) {
+        Intent intent = new Intent(HookDemoApp.instance(), activity.getClass());
+        activity.startActivity(intent);
     }
 
     public static void logInvoke(Object o, Method method, Object[] args) {

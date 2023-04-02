@@ -29,4 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_hook_target_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="通过欺骗AMS，打开一个没有声明过的activity"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -39,6 +39,9 @@
         <activity
             android:name=".activity.hook04.HookStartActivity04"
             android:exported="true" />
+        <activity
+            android:name=".replace.StubActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

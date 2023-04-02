@@ -30,7 +30,7 @@ public class HookStartActivity extends BaseActivity {
         mBinding = ActivityHookStartBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
-        mBinding.btnHook01.setOnClickListener(view -> Utils.startActivity(HookStartActivity01.class));
+        mBinding.btnHook01.setOnClickListener(view -> Utils.startActivity(HookStartActivity.this));
 
         mBinding.btnHook02.setOnClickListener(view -> Utils.startActivity(HookStartActivity02.class));
 
